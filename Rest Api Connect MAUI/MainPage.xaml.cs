@@ -2,8 +2,10 @@
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        private readonly IHttpClientFactory _httpClientBuilder;
+        public MainPage(IHttpClientFactory httpClientFactory)
         {
+            _httpClientBuilder = httpClientFactory;
             InitializeComponent();
         }
 
@@ -20,6 +22,17 @@
             var response = await httpClient.GetAsync($"{baseUrl}/WeatherForecast");
             var dataRead = await response.Content.ReadAsStringAsync();
             apiResponseData.Text = dataRead;
+        }
+
+        private async void OnGetDataFromApiCliced(object sender, EventArgs e)
+        {
+            var httpClient = _httpClientBuilder.CreateClient("maui-to-https-localhost");
+            var response = await httpClient.GetAsync("/WeatherForecast");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                label.Text = content;
+            }
         }
     }
 

@@ -35,6 +35,18 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCallApiBtnClicke"
                 HorizontalOptions="Center" />
+            
+          
+
+            <Button
+                Text="Get Data From Api"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnGetDataFromApiCliced"
+                HorizontalOptions="Center" />
+            <Label x:Name="label"/>
+
+
+
 
         </VerticalStackLayout>
     </ScrollView>
